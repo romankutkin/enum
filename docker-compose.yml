@@ -16,3 +16,19 @@ services:
             context: ./docker/php-fpm
         volumes:
             - ./:/var/www/html:rw
+        depends_on:
+            - postgres
+
+    postgres:
+        image: postgres:13.5-alpine
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        volumes:
+            - database:/var/lib/postgresql/data:rw
+
+volumes:
+    database:
