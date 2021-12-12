@@ -219,6 +219,9 @@
     "symfony/runtime": {
         "version": "v6.0.0"
     },
+    "symfony/serializer": {
+        "version": "v6.0.1"
+    },
     "symfony/service-contracts": {
         "version": "v3.0.0"
     },
