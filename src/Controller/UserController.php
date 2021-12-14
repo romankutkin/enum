@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Messanger\Bus\CommandBus;
+use App\Messanger\Bus\QueryBus;
 use App\Messanger\Message\CreateUserCommand;
+use App\Messanger\Message\Query\GetUserQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +18,7 @@ class UserController extends AbstractController
 {
     public function __construct(
         private CommandBus $commandBus,
+        private QueryBus $queryBus,
     ) {}
 
     #[Route('/api/users', methods: ['POST'])]
@@ -26,5 +29,20 @@ class UserController extends AbstractController
         $this->commandBus->dispatch($command);
 
         return new JsonResponse();
+    }
+
+    #[Route('/api/users/{user}', methods: ['GET'])]
+    public function show($user): JsonResponse
+    {
+        $user = $this->queryBus->dispatch(new GetUserQuery($user));
+
+        return new JsonResponse([
+            'data' => [
+                'id' => $user[0]->getUid(),
+                'attributes' => [
+                    'username' => $user[0]->getUsername(),
+                ],
+            ],
+        ]);
     }
 }

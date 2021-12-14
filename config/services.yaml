@@ -27,3 +27,7 @@ services:
         App\Messanger\Handler\CommandHandlerInterface:
             tags:
                 - { name: messenger.message_handler, bus: command.bus }
+
+        App\Messanger\Handler\QueryHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: query.bus }
