@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Messanger\Handler;
+namespace App\Messanger\Handler\Command;
 
 use App\Entity\User;
-use App\Messanger\Message\CreateUserCommand;
+use App\Messanger\Handler\CommandHandlerInterface;
+use App\Messanger\Message\Command\CreateUserCommand;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CreateUserHandler implements CommandHandlerInterface

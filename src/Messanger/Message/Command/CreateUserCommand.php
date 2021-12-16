@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Messanger\Message;
+namespace App\Messanger\Message\Command;
+
+use App\Messanger\Message\CommandInterface;
 
 class CreateUserCommand implements CommandInterface
 {

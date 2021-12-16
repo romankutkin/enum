@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Messanger\Bus\CommandBus;
 use App\Messanger\Bus\QueryBus;
-use App\Messanger\Message\CreateUserCommand;
+use App\Messanger\Message\Command\CreateUserCommand;
 use App\Messanger\Message\Query\GetUserQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

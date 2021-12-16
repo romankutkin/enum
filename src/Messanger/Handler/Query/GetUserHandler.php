@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Messanger\Handler;
+namespace App\Messanger\Handler\Query;
 
 use App\Entity\User;
+use App\Messanger\Handler\QueryHandlerInterface;
 use App\Messanger\Message\Query\GetUserQuery;
 use Doctrine\ORM\EntityManagerInterface;
 
