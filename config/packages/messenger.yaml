@@ -4,8 +4,12 @@ framework:
         # failure_transport: failed
         default_bus: command.bus
         buses:
-            command.bus: ~
-            query.bus: ~
+            command.bus:
+                middleware:
+                    - App\Validator\Middleware\ValidatorMiddleware
+            query.bus:
+                middleware:
+                    - App\Validator\Middleware\ValidatorMiddleware
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration

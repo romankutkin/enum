@@ -11,6 +11,7 @@ use App\Messanger\Message\Query\GetUserQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -26,7 +27,17 @@ class UserController extends AbstractController
     {
         $command = $serializer->deserialize($request->getContent(), CreateUserCommand::class, 'json');
 
-        $this->commandBus->dispatch($command);
+        try {
+            $this->commandBus->dispatch($command);
+        } catch (HandlerFailedException $exception) {
+            $exception = $exception->getPrevious();
+
+            return new JsonResponse([
+                'errors' => [
+                    'detail' => $exception->getMessage(),
+                ],
+            ]);
+        }
 
         return new JsonResponse();
     }

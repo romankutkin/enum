@@ -17,6 +17,18 @@ class CreateUserHandler implements CommandHandlerInterface
 
     public function __invoke(CreateUserCommand $command): void
     {
+        $repository = $this->entityManager->getRepository(User::class);
+
+        $user = $repository->findOneBy([
+            'username' => $command->getUsername(),
+        ]);
+
+        if ($user) {
+            throw new \DomainException(
+                sprintf("User with username '%s' already exists.", $command->getUsername())
+            );
+        }
+
         $user = new User(
             username: $command->getUsername(),
             password: $command->getPassword(),

@@ -7,7 +7,7 @@ namespace App\Messanger\Bus;
 use App\Messanger\Message\CommandInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class CommandBus
+final class CommandBus implements CommandBusInterface
 {
     public function __construct(
         private MessageBusInterface $commandBus,
