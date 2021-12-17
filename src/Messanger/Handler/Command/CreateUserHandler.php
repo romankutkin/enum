@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Messanger\Handler\Command;
 
 use App\Entity\User;
+use App\Exception\NotUniqueValueException;
 use App\Messanger\Handler\CommandHandlerInterface;
 use App\Messanger\Message\Command\CreateUserCommand;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +25,7 @@ class CreateUserHandler implements CommandHandlerInterface
         ]);
 
         if ($user) {
-            throw new \DomainException(
+            throw new NotUniqueValueException(
                 sprintf("User with username '%s' already exists.", $command->getUsername())
             );
         }
