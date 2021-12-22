@@ -9,7 +9,7 @@ use App\Validator\Exception\ConstraintViolationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
-class ConstraintViloationListener
+class ConstraintViolationListener
 {
     public function onKernelException(ExceptionEvent $event): void
     {
